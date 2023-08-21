@@ -81,21 +81,12 @@
 				</div>
 				
 				<div class="form-website-text">
-					<label id="website-text-label" for="websiteTextField">Website text</label>
+					<label id="website-text-label" for="websiteTextField">Website</label>
 					<select id="websiteTextField" name="website-text">
 						<option value="flatwaterfreepress.org">flatwaterfreepress.org</option>
 						<option value="siliconprairienews.com">siliconprairienews.com</option>
 						<option value="nebraskajournalismtrust.org">nebraskajournalismtrust.org</option>
 					</select>
-				</div>
-				
-				<div class="form-website-url">
-					<label id="website-url-label" for="websiteURLField">Website URL</label>
-					<select id="websiteURLField" name="webiste-url">
-						<option value="https://flatwaterfreepress.org">https://flatwaterfreepress.org</option>
-						<option value="https://siliconprairienews.com">https://siliconprairienews.com</option>
-						<option value="https://nebraskajournalismtrust.org">https://nebraskajournalismtrust.org</option>
-					</select>				
 				</div>
 				
 				<div class="form-linkedin">
@@ -216,7 +207,6 @@
   		var phone1Field = document.getElementById('phone1Field').value;
   		var phone2Field = document.getElementById('phone2Field').value;
   		var websiteTextField = document.getElementById('websiteTextField').value;
-  		var websiteURLField = document.getElementById('websiteURLField').value;
   		var linkedinField = document.getElementById('linkedinField').value;
   		var twitterField = document.getElementById('twitterField').value;
   		var facebookField = document.getElementById('facebookField').value;
@@ -248,7 +238,23 @@
   		}
   		
   		function website() {
-	  		personWebsite.innerHTML = "<a href='" + websiteURLField + "' style='text-decoration: none; color: inherit;'>" + websiteTextField + "</a>"
+			  var ffp = "https://www.flatwaterfreepress.org";
+			  var spn = "https://www.siliconprairienews.com";
+			  var njt = "https://www.nebraskajournalismtrust.org";
+			  
+			  if (websiteTextField == "flatwaterfreepress.org") {
+	  				personWebsite.innerHTML = "<a href='" + ffp + "' style='text-decoration: none; color: inherit;'>" + websiteTextField + "</a>"
+				  
+			  }
+			  if (websiteTextField == "siliconprairienews.com") {
+	  				personWebsite.innerHTML = "<a href='" + spn + "' style='text-decoration: none; color: inherit;'>" + websiteTextField + "</a>"
+				  
+			  }
+			  if (websiteTextField == "nebraskajournalismtrust.org") {
+	  				personWebsite.innerHTML = "<a href='" + njt + "' style='text-decoration: none; color: inherit;'>" + websiteTextField + "</a>"
+				  
+			  }
+			  
   		}
   		
   		function email() {
@@ -281,7 +287,7 @@
 	 		if (personEmail) { email(emailField); };
 	 		if (phone1Field) { personPhone1.innerHTML = "Direct: " + phone1Field; } else { personPhone1.innerHTML = "" };
 	 		if (phone2Field) { personPhone2.innerHTML = "Office: " + phone2Field; } else { personPhone2.innerHTML = "" };
-	 		if (websiteTextField !== "") { website(websiteTextField, websiteURLField) };
+	 		if (websiteTextField !== "") { website(websiteTextField) };
 	 		if (facebookField) { facebook(facebookField) } else { personFacebook.innerHTML = "" };
 	 		if (twitterField) { twitter(twitterField) }  else { personTwitter.innerHTML = "" };
 	 		if (instagramField) { instagram(instagramField) }  else { personInstagram.innerHTML = "" };
@@ -291,7 +297,9 @@
 			
 			if (!facebookField && !twitterField && !instagramField && !linkedinField) { 
 				const socialLinks = document.getElementById("signatureSocial");
-				socialLinks.remove();
+				if (socialLinks) {
+					socialLinks.remove();
+				}
 			}
 				  		
   		}
