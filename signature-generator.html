@@ -1,0 +1,315 @@
+<!DOCTYPE html>
+<html lang="en-US">
+
+<head>
+	<meta http-equiv="content-type" content="text/html" charset="UTF-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+	
+	<style>
+		
+		body { font-family: sans-serif; }
+		div.signature-generator { display: flex; column-gap: 30px; }
+		
+		div.inputs { padding: 40px; background: #eee; width: 300px; font-size: 12px; }
+		
+		form div { margin-bottom: 10px; display: flex;}
+		form div label { width: 100px; }
+
+		div#code-output { margin-top: 40px; font-family: ui-monospace, monospace; border: 2px solid #ccc; padding: 20px; font-size: 12px; display: none; }
+						
+		p#signatureSocial > *:not(:last-child)::after, p#signaturePhoneNumbers > *:not(:last-child)::after  { content: " / ";}
+		
+	</style>
+
+</head>
+
+<body>
+	
+	<div class="signature-generator">
+		
+		<div class="inputs">
+		
+			<form id="info-form">
+				
+				<div class="form-logo">
+					<label id="logo-label" for="nameField">Logo</label>
+					<select id="logoField" name="logos">
+						<option value="ffp">Flatwater Free Press</option>
+						<option value="spn">Silicon Prairie News</option>
+						<option value="njt">Nebraska Journalism Trust</option>
+					</select>
+				</div>
+				
+				
+				<div class="form-name">
+					<label id="name-label" for="nameField">Name</label>
+					<input id="nameField" type="text" maxlength="100" placeholder="First and last"></input>
+				</div>
+				
+				<div class="form-pronouns">
+					<label id="pronouns-label" for="nameField">Pronouns</label>
+					<input id="pronounsField" type="text" maxlength="100" placeholder="No parentheses"></input>
+				</div>
+	
+				<div class="form-jobtitle">
+					<label id="job-label" for="jobField">Job title</label>
+					<input id="jobField" type="text" maxlength="100"></input>
+				</div>
+	
+				<div class="form-organization">
+					<label id="org-label" for="Field">Organization</label>
+					<select id="orgField" name="org-names">
+						<option value="Flatwater Free Press">Flatwater Free Press</option>
+						<option value="Silicon Prairie News">Silicon Prairie News</option>
+						<option value="Nebraska Journalism Trust">Nebraska Journalism Trust</option>
+					</select>				
+				</div>
+	
+				<div class="form-email">
+					<label id="email-label" for="emailField">Email</label>
+					<input id="emailField" type="text" maxlength="100"></input>
+				</div>
+				
+				<div class="form-phone1">
+					<label id="phone1-label" for="phone1Field">Direct phone number</label>
+					<input id="phone1Field" type="text" maxlength="100"></input>
+				</div>
+				
+				<div class="form-phone2">
+					<label id="phone2-label" for="phone2Field">Office Phone Number</label>
+					<input id="phone2Field" type="text" maxlength="100"></input>
+				</div>
+				
+				<div class="form-website-text">
+					<label id="website-text-label" for="websiteTextField">Website text</label>
+					<select id="websiteTextField" name="website-text">
+						<option value="flatwaterfreepress.org">flatwaterfreepress.org</option>
+						<option value="siliconprairienews.com">siliconprairienews.com</option>
+						<option value="nebraskajournalismtrust.org">nebraskajournalismtrust.org</option>
+					</select>
+				</div>
+				
+				<div class="form-website-url">
+					<label id="website-url-label" for="websiteURLField">Website URL</label>
+					<select id="websiteURLField" name="webiste-url">
+						<option value="https://flatwaterfreepress.org">https://flatwaterfreepress.org</option>
+						<option value="https://siliconprairienews.com">https://siliconprairienews.com</option>
+						<option value="https://nebraskajournalismtrust.org">https://nebraskajournalismtrust.org</option>
+					</select>				
+				</div>
+				
+				<div class="form-linkedin">
+					<label id="linkedin-label" for="linkedinField">LinkedIn</label>
+					<input id="linkedinField" type="text" maxlength="300"  placeholder="Include full URL https://"></input>
+				</div>
+				
+				<div class="form-twitter">
+					<label id="twitter-label" for="twitterField">Twitter</label>
+					<input id="twitterField" type="text" maxlength="300" placeholder="Include full URL https://"></input>
+				</div>
+				
+				<div class="form-instagram">
+					<label id="instagram-label" for="instagramField">Instagram</label>
+					<input id="instagramField" type="text" maxlength="300" placeholder="Include full URL https://"></input>
+				</div>
+				
+				<div class="form-facebook">
+					<label id="facebook-label" for="facebookField">Facebook</label>
+					<input id="facebookField" type="text" maxlength="300" placeholder="Include full URL https://"></input>
+				</div>
+				
+				<div class="form-promo">
+					<label id="promo-label" for="promoField">Promo</label>
+					<textarea id="promoField" placeholder="Optional text or html"></textarea>
+				</div>
+				
+				<div class='form-sub'>
+					<button id='subButton' type='button'>Submit</button>
+				</div>
+	
+			</form>
+
+			<div>
+				<p id='result'></p>
+			</div>
+
+	</div><!-- end inputs -->
+
+	<div class="output" style="width: 100%;">
+
+	<!-- -------------------- START email signature -------------------- -->
+	
+	<div id="signature-code">
+	<div class="signature" id="email-signature" style="margin: 60px 0; width: 100%; min-width: 400px;">
+		<table style="margin: 25px 0 15px; border-top: 1px solid #eee; border-bottom: 1px solid #eee; padding: 25px 0 25px; width: 100%; font-size: 16px; font-family: sans-serif; line-height: 1.3;">
+			<tbody>
+				<tr>
+					<td class="logo" id="signatureLogo" style="width: 70px; vertical-align: top;">
+						<a href="https://flatwaterfreepress.org" target="_blank" style="color: inherit;"><img src="https://flatwaterfreepress.org/wp-content/uploads/2021/08/flaterwater-round-small-2.png" width="60" style="display: block; max-width: 60px;" /></a>
+					</td>
+					<td class="name-block" style="vertical-align: top;">
+						<p style="margin: 0; line-height: 1.4;"><strong><span id="signatureName">Firstname Lastname</span></strong><span class="pronouns" style="font-size: 80%; color: #999; padding-left: 5px;" id="signaturePronouns">pro/nouns</span></p>
+						<span style="font-size: 0.8rem;">
+							  <p id="signatureJob" style="margin: 0; line-height: 1.4;">Job title</p>
+							  <p id="signatureOrg" style="margin: 0; line-height: 1.4;">Organization</p>
+						  </span>
+					</td>
+				</tr>
+
+				<tr>
+					<td style="vertical-align: top;">&nbsp;</td>
+					<td class="contact-info" style="vertical-align: top; font-size: 0.75rem; color: #777; padding: 10px 0 0;">
+						<p id="signatureEmail" style="margin: 0;">email@address</p>
+						<p style="margin: 5px 0 0;" id="signaturePhoneNumbers"><span id="signaturePhone1">Direct: 555-555-5555</span><span id="signaturePhone2">Office: 555-555-5555</span></p>
+						<p id="signatureWebsite" style="margin: 5px 0 0;">website.com</p>
+						<p id="signatureSocial" style="margin: 5px 0 0;"><span id="signatureFacebook">Facebook</span><span id="signatureTwitter">Twitter</span><span id="signatureInstagram">Instagram</span><span id="signatureLinkedIn">LinkedIn</span></p>
+					</td>
+				</tr>
+			</tbody>
+		</table>
+
+		<p class="promos" style="color: #aaa; font-family: sans-serif; line-height: 1.2; padding: 0 10px; font-size: 0.7rem;" id="signaturePromo">Optional promo text or images can go down here if you want more space for donate links, etc. <a href="#" target="_blank" style="color: #999;">Learn more &raquo;</a></p>
+
+	</div>
+	</div>
+	
+	<!-- -------------------- END email signature -------------------- -->
+
+	</div><!-- end output div -->
+	
+
+	</div><!-- end signature-generator -->
+	
+	<div id="code-output">
+		<pre style="color: #aaa;">When finished, copy code from here into the signature settings in your email program.</pre>
+	</div>
+
+  </body>
+  
+  <script>
+	  
+	  	var personLogo = document.getElementById('signatureLogo');
+		var personName = document.getElementById('signatureName');
+		var personPronouns = document.getElementById('signaturePronouns');
+		var personJob = document.getElementById('signatureJob');
+		var personOrg = document.getElementById('signatureOrg');
+		var personEmail = document.getElementById('signatureEmail');
+		var personPhone1 = document.getElementById('signaturePhone1');
+		var personPhone2 = document.getElementById('signaturePhone2');
+		var personWebsite = document.getElementById('signatureWebsite');
+		var personSocial = document.getElementById('signatureSocial');
+		var personLinkedin = document.getElementById('signatureLinkedIn');
+		var personTwitter = document.getElementById('signatureTwitter');
+		var personFacebook = document.getElementById('signatureFacebook');
+		var personInstagram = document.getElementById('signatureInstagram');
+		var personPromo = document.getElementById('signaturePromo');
+		
+		var codeOutput = document.getElementById('code-output');
+	  
+	  function getUserInfo() {
+  		var logoField = document.getElementById('logoField').value;
+  		var nameField = document.getElementById('nameField').value;
+  		var pronounsField = document.getElementById('pronounsField').value;
+  		var jobField = document.getElementById('jobField').value;
+  		var orgField = document.getElementById('orgField').value;
+  		var emailField = document.getElementById('emailField').value;
+  		var phone1Field = document.getElementById('phone1Field').value;
+  		var phone2Field = document.getElementById('phone2Field').value;
+  		var websiteTextField = document.getElementById('websiteTextField').value;
+  		var websiteURLField = document.getElementById('websiteURLField').value;
+  		var linkedinField = document.getElementById('linkedinField').value;
+  		var twitterField = document.getElementById('twitterField').value;
+  		var facebookField = document.getElementById('facebookField').value;
+  		var instagramField = document.getElementById('instagramField').value;
+  		var promoField = document.getElementById('promoField').value;
+  		
+  		var result = document.getElementById('result');
+  		
+  		
+  		var ffp_logo = 'https://flatwaterfreepress.org/wp-content/uploads/2021/08/flaterwater-round-small-2.png';
+  		var ffp_link = 'https://flatwaterfreepress.org';
+  		
+  		var spn_logo = 'https://siliconprairienews.com/wp-content/uploads/2019/05/SPNHeaderLogo.png';
+  		var spn_link = 'https://siliconprairienews.org';
+	
+  		var njt_logo = 'https://nebraskajournalismtrust.org/wp-content/uploads/2023/08/new-njt.jpg';
+  		var njt_link = 'https://nebraskajournalismtrust.org';
+	  		
+  		function getLogo() {
+	  		if (logoField == "ffp") { 
+		  		personLogo.innerHTML = "<a href='" + ffp_link + "' target='_blank' style='color:inherit;'><img src='" + ffp_logo + "' width='60' /></a>";
+	  		};
+	  		if (logoField == "spn") { 
+		  		personLogo.innerHTML = "<a href='" + spn_link + "' target='_blank' style='color:inherit;'><img src='" + spn_logo + "' width='60' /></a>";
+	  		};
+	  		if (logoField == "njt") { 
+		  		personLogo.innerHTML = "<a href='" + njt_link + "' target='_blank' style='color:inherit;'><img src='" + njt_logo + "' width='60' /></a>";
+	  		};
+  		}
+  		
+  		function website() {
+	  		personWebsite.innerHTML = "<a href='" + websiteURLField + "' style='text-decoration: none; color: inherit;'>" + websiteTextField + "</a>"
+  		}
+  		
+  		function email() {
+	  		personEmail.innerHTML = "<a href='mailto:" + emailField + "' style='text-decoration: none; color: inherit;'>" + emailField + "</a>"
+  		}
+			
+  		function facebook() {
+	  		personFacebook.innerHTML = "<a href='" + facebookField + "' style='text-decoration: none; color: inherit;'>Facebook</a>"
+  		}
+  		function instagram() {
+	  		personInstagram.innerHTML = "<a href='" + instagramField + "' style='text-decoration: none; color: inherit;'>Instagram</a>"
+  		}
+  		function linkedin() {
+	  		personLinkedin.innerHTML = "<a href='" + linkedinField + "' style='text-decoration: none; color: inherit;'>LinkedIn</a>"
+  		}
+  		function twitter() {
+	  		personTwitter.innerHTML = "<a href='" + twitterField + "' style='text-decoration: none; color: inherit;'>Twitter</a>"
+  		}
+			
+  		
+  		if (nameField.length < 3) {
+	  		result.innerHTML = 'Name field must contain at least3 characters';
+  		} else {
+	 		
+	 		if (personLogo) { getLogo(logoField); };
+	 		if (nameField) { personName.innerHTML = nameField; };
+	 		if (personPronouns !== "") { personPronouns.innerHTML = pronounsField };
+	 		if (personJob) { personJob.innerHTML = jobField; };
+	 		if (personOrg) { personOrg.innerHTML = orgField; };
+	 		if (personEmail) { email(emailField); };
+	 		if (phone1Field) { personPhone1.innerHTML = "Direct: " + phone1Field; } else { personPhone1.innerHTML = "" };
+	 		if (phone2Field) { personPhone2.innerHTML = "Office: " + phone2Field; } else { personPhone2.innerHTML = "" };
+	 		if (websiteTextField !== "") { website(websiteTextField, websiteURLField) };
+	 		if (facebookField) { facebook(facebookField) } else { personFacebook.innerHTML = "" };
+	 		if (twitterField) { twitter(twitterField) }  else { personTwitter.innerHTML = "" };
+	 		if (instagramField) { instagram(instagramField) }  else { personInstagram.innerHTML = "" };
+	 		if (linkedinField) { linkedin(linkedinField) }  else { personLinkedin.innerHTML = "" };
+	 		if (personPromo) { personPromo.innerHTML = promoField; };
+			
+			
+			if (!facebookField && !twitterField && !instagramField && !linkedinField) { 
+				const socialLinks = document.getElementById("signatureSocial");
+				socialLinks.remove();
+			}
+				  		
+  		}
+	  } // getUserInfo
+	  
+	  	  
+		function printDiv() {
+			var divContents = document.getElementById("signature-code").innerHTML;
+			codeOutput.innerText = divContents;
+		}	  
+
+	  
+	  var subButton = document.getElementById('subButton');
+	  subButton.addEventListener('click', getUserInfo, false); 
+	  subButton.addEventListener('click', printDiv, false); 
+	  
+
+	  
+  </script>
+  
+</html>
