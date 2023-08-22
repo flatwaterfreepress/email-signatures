@@ -308,28 +308,40 @@
 
 		function socialLinks() {
 			
-			const fb = facebookField;
-			const ig = instagramField;
-			const tw = twitterField;
-			const li = linkedinField;
+			const fb = { name:"Facebook", url:facebookField };
+			const ig = { name:"Instagram", url:instagramField };
+			const tw = { name: "Twitter", url:twitterField };
+			const li = { name: "LinkedIn", url:linkedinField };
 			
-			const variablesToCheck = [fb,ig,tw,li];
+			const variablesToCheck = [ fb, ig, tw, li ];
 			const container = document.createElement('div');
 		
 			variablesToCheck.forEach((element) => {
 				console.log(element);
-				if (element.trim() !== '') {
-					const variableValue = window[element];
+				if (element.url.trim() !== '') {
+					const variableValue = element.url.trim();
 					const span = document.createElement('span');
 					const link = document.createElement('a');
 					
 					link.href = variableValue;
-					link.textContent = element;
+					link.textContent = element.name;
 					link.style.color = 'inherit';
 					link.style.textDecoration = 'none';
 					span.appendChild(link);
 					container.appendChild(span);
 				}
+			});
+			
+			const outputDiv = document.createElement('div');
+			outputDiv.innerHTML = '';
+			
+			// Append all links and add '/' after each except the last one
+			container.querySelectorAll('a').forEach((link, index, links) => {
+				outputDiv.appendChild(link);
+				if (index < links.length - 1) {
+					outputDiv.appendChild(document.createTextNode(' / '));
+				}
+				container.appendChild(outputDiv);
 			});
 		
 			return container.innerHTML;
