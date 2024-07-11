@@ -129,12 +129,22 @@
 					<input id="facebookField" type="text" maxlength="300" placeholder="Include full URL https://"></input>
 				</div>
 				
-				<!--
-				<div class="form-promo">
-					<label id="promo-label" for="promoField">Promo</label>
-					<textarea id="promoField" placeholder="Optional text or html"></textarea>
+				
+				<div class="form-promo-images">
+					<label id="promo-images-label" for="promoImageField">Promo image(s)</label>
+					<select id="promoImageField" name="promoImages">
+						<option value="none">None</option>
+						<option value="flatfest2024">Flatwater Festival 2024</option>
+						<option value="spsw2024">Silicon Prairie Startup Week 2024</option>
+						<option value="both">Both</option>
+					</select>
 				</div>
-				-->
+			
+				<div class="form-promo-text">
+					<label id="promo-label" for="promoField">Promo text</label>
+					<textarea id="promoTextField" placeholder="Optional text or html"></textarea>
+				</div>
+			
 				
 				<div class='form-sub'>
 					<button id='subButton' type='button'>Submit</button>
@@ -183,7 +193,9 @@
 			</tbody>
 		</table>
 
-		<!-- <p class="promos" style="color: #aaa; font-family: sans-serif; line-height: 1.2; padding: 0 10px; font-size: 0.7rem;" id="signaturePromo"></p>-->
+		<p class="promo-images" style="color: #aaa; font-family: sans-serif; line-height: 1.2; padding: 0 10px; font-size: 0.7rem;" id="signaturePromoImages"></p>
+		
+		<p class="promos" style="color: #aaa; font-family: sans-serif; line-height: 1.2; padding: 0 10px; font-size: 0.7rem;" id="signaturePromoText"></p>
 
 	</div>
 	
@@ -223,7 +235,8 @@
 		var personTwitter = document.getElementById('signatureTwitter');
 		var personFacebook = document.getElementById('signatureFacebook');
 		var personInstagram = document.getElementById('signatureInstagram');
-		// var personPromo = document.getElementById('signaturePromo');
+		var personPromoImages = document.getElementById('signaturePromoImages');
+		var personPromo = document.getElementById('signaturePromoText');
 		
 		var codeOutput = document.getElementById('code-output');
 	  
@@ -241,7 +254,8 @@
   		var twitterField = document.getElementById('twitterField').value;
   		var facebookField = document.getElementById('facebookField').value;
   		var instagramField = document.getElementById('instagramField').value;
-  		// var promoField = document.getElementById('promoField').value;
+  		var promoImageField = document.getElementById('promoImageField').value;
+  		var promoField = document.getElementById('promoTextField').value;
   		
   		var result = document.getElementById('result');
   		
@@ -349,6 +363,28 @@
 		}
 		
 		
+		var flatfest24_promo = 'https://flatwaterfreepress.org/wp-content/uploads/2024/07/flatwater-festival-2024-email-promo.png';
+		var flatfest24_link = 'https://flatwaterfreepress.org/festival';
+		  
+		var spsw24_promo = 'https://flatwaterfreepress.org/wp-content/uploads/2024/07/spsw-2024-email-promo.png';
+		var spsw24_link = 'https://siliconprairienews.org/spsw';
+		
+		function getPromoImages() {
+			if (promoImageField == "flatfest2024") { 
+				  personPromoImages.innerHTML = "<a href='" + flatfest24_link + "' target='_blank' style='color:inherit;'><img src='" + flatfest24_promo + "' height='40' /></a>";
+			};
+			if (promoImageField == "spsw2024") { 
+				  personPromoImages.innerHTML = "<a href='" + spsw24_link + "' target='_blank' style='color:inherit;'><img src='" + spsw24_promo + "' height='40' /></a>";
+			};
+			if (promoImageField == "none") { 
+				  personPromoImages.innerHTML = "";
+			};
+			if (promoImageField == "both") { 
+				  personPromoImages.innerHTML = "<a href='" + flatfest24_link + "' target='_blank' style='color:inherit;'><img src='" + flatfest24_promo + "' height='40' /></a><br/><a href='" + spsw24_link + "' target='_blank' style='color:inherit;'><img src='" + spsw24_promo + "' height='40' /></a>";
+			};
+		}
+		
+		
   		
   		if (nameField.length < 3) {
 	  		result.innerHTML = 'Name field must contain at least 3 characters';
@@ -363,7 +399,8 @@
 	 		personPhones.innerHTML = phones(phone1Field, phone2Field);
 			personSocial.innerHTML = socialLinks(facebookField,instagramField,twitterField,linkedinField);
 			 if (websiteTextField !== "") { website(websiteTextField) };
-	 		// if (personPromo) { personPromo.innerHTML = promoField; };
+	 		 if (personPromoImages) { getPromoImages(promoImageField); };
+	 		 if (personPromo) { personPromo.innerHTML = promoField; };
 			
 				  		
   		}
