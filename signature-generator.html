@@ -134,6 +134,8 @@
 					<label id="promo-images-label" for="promoImageField">Promo image(s)</label>
 					<select id="promoImageField" name="promoImages">
 						<option value="none">None</option>
+						<option value="flatfest2025">Flatwater Festival 2025</option>
+						<option value="spsw2025">Silicon Prairie Startup Week 2025</option>
 						<option value="flatfest2024">Flatwater Festival 2024</option>
 						<option value="spsw2024">Silicon Prairie Startup Week 2024</option>
 						<option value="both">Both</option>
@@ -369,7 +371,19 @@
 		var spsw24_promo = 'https://flatwaterfreepress.org/wp-content/uploads/2024/07/spsw-2024-email-promo.png';
 		var spsw24_link = 'https://siliconprairienews.com/spsw';
 		
+		var flatfest25_promo = 'https://flatwaterfreepress.org/wp-content/uploads/2025/06/flatfest-2025-promo.png';
+		var flatfest25_link = 'https://flatwaterfreepress.org/events/flatwater-festival-2025/';
+		  
+		var spsw25_promo = 'https://siliconprairienews.com/wp-content/uploads/2025/06/spsw-2025-promo.png';
+		var spsw25_link = 'https://siliconprairienews.com/spsw';
+		
 		function getPromoImages() {
+			if (promoImageField == "flatfest2025") { 
+				  personPromoImages.innerHTML = "<a href='" + flatfest25_link + "' target='_blank' style='color:inherit;'><img src='" + flatfest25_promo + "' height='50' /></a>";
+			};
+			if (promoImageField == "spsw2025") { 
+				  personPromoImages.innerHTML = "<a href='" + spsw25_link + "' target='_blank' style='color:inherit;'><img src='" + spsw25_promo + "' height='50' /></a>";
+			};
 			if (promoImageField == "flatfest2024") { 
 				  personPromoImages.innerHTML = "<a href='" + flatfest24_link + "' target='_blank' style='color:inherit;'><img src='" + flatfest24_promo + "' height='40' /></a>";
 			};
